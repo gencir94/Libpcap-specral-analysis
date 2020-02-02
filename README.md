@@ -5,7 +5,7 @@ We extract the source and destination ip address and the related ports of the sy
 Subsequently, we filter the pcap file with the ip address and the ports saved from every syn packet.
 From each flow we extract the packets payload, creating series to take in input to compute the Fast Fourier Transform (FFT).
 With this method we can analyse the packets payload frequency of the flow.
-To compute the FFT we use a library called "KISS FFT".
+To compute the FFT we use a library called "KISS FFT" https://github.com/mborgerding/kissfft .
 
 To compile the file, give 
 
