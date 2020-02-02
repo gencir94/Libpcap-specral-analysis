@@ -465,7 +465,8 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 		         }
 		  }
 	        
-	     if ( ( tcp->th_flags == 17 )  || ( packet_counter == 256 )  || ( ( packet_counter_inv == 256 )  && ( packet_counter > 128 ) ) ) {
+	     if ( ( tcp->th_flags == 17 )  || ( packet_counter == 256 )  || 
+                ( ( packet_counter_inv == 256 ) && ( packet_counter > 128 ) ) ) {
                 
 		int lock = 0;
 		int jj,kk;
@@ -569,7 +570,8 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 		        save_mac[2] == list_mac[kk+2] && save_mac[3] == list_mac[kk+3] &&
 		        save_mac[4] == list_mac[kk+4] && save_mac[5] == list_mac[kk+5] ) {
 		 
-                        if ( (kk == 174) || (kk == 168) || (kk == 162) || (kk == 156) || (kk == 150) || (kk == 144) || (kk == 138) ) {
+                        if ( (kk == 174) || (kk == 168) || (kk == 162) || (kk == 156) || 
+                             (kk == 150) || (kk == 144) || (kk == 138) ) {
 		         	 fprintf(a,", %s frequency","NON_IOT");
 		        }else {
 		      	         fprintf(a,", %s frequency",list_name[kk/6]);
@@ -659,29 +661,29 @@ int main(int argc, char *argv[]) {
    
    }
 
-  char* filter_exp_2 = malloc(N * sizeof(char));
+   char* filter_exp_2 = malloc(N * sizeof(char));
 
-  for(i = 0; i < k; i++) {
+   for(i = 0; i < k; i++) {
     
-    strcpy(filter_exp_2,copy[i]);
-    handle = pcap_open_offline(argv[1], error_buffer);
+     strcpy(filter_exp_2,copy[i]);
+     handle = pcap_open_offline(argv[1], error_buffer);
 
-    if (pcap_compile(handle, &fp, filter_exp_2, 0, net) == -1) {
+     if (pcap_compile(handle, &fp, filter_exp_2, 0, net) == -1) {
 		 fprintf(stderr, "Couldn't parse filter %s : %s\n", filter_exp_2, pcap_geterr(handle));
 		 return(2);
 	 }
-    if (pcap_setfilter(handle, &fp) == -1) {
+     if (pcap_setfilter(handle, &fp) == -1) {
 			fprintf(stderr, "Couldn't install filter %s : %s\n", filter_exp_2, pcap_geterr(handle));
 			return(2);
 		}
   
-    pcap_loop(handle, -1, got_packet, my_arguments);
+     pcap_loop(handle, -1, got_packet, my_arguments);
 
-    pcap_freecode(&fp);  /*Free memory*/
-    pcap_close(handle);  /*Free memory*/
+     pcap_freecode(&fp);  /*Free memory*/
+     pcap_close(handle);  /*Free memory*/
    
-    packet_counter = 0;
-    packet_counter_inv = 0;
+     packet_counter = 0;
+     packet_counter_inv = 0;
 
   } 
 
