@@ -83,8 +83,8 @@ combo_y_train2 = np.concatenate((combo_y_train,spam_y_train3))
 combo_X_test2 = np.concatenate((combo_X_test,spam_X_test3))
 combo_y_test2 = np.concatenate((combo_y_test,spam_y_test3))
 
-combo_X_test2=  shuffle(combo_X_test2)
-combo_y_test2=  shuffle(combo_y_test2)
+combo_X_test2 =  shuffle(combo_X_test2)
+combo_y_test2 =  shuffle(combo_y_test2)
 
 combo_X_train3 = np.concatenate((combo_X_train2,spam_X_train4))
 combo_y_train3 = np.concatenate((combo_y_train2,spam_y_train4)) 
@@ -123,63 +123,75 @@ per1 = (len(spam_X_test)*2)/3
 newtest_X_test = spam_X_test[:per1,:]
 spam_X_test_0 = spam_X_test[per1:,:]
 newtest_X_test = shuffle(newtest_X_test)
-
+print(len(newtest_X_test))
 
 newtest_X_test2 = np.concatenate((spam_X_test_0[:len(spam_X_test2),:],spam_X_test2)) 
 per1 = (len(newtest_X_test2)*2)/3
 newtest_X_test2 = shuffle(newtest_X_test2)
 newtest_X_test2 = newtest_X_test2[:per1,:]
+print(len(newtest_X_test2))
 
 per1 = (len(combo_X_test)*2)/3 
 combo_X_test_0 = combo_X_test[:per1,:]
 combo_X_test_0_0 = combo_X_test[per1:,:]
+print("lung ",len(combo_X_test_0))
 
 newtest_X_test3 = np.concatenate((combo_X_test_0_0[:len(spam_X_test3),:],spam_X_test3))
 per1 = (len(newtest_X_test3)*2)/3
 newtest_X_test3 = shuffle(newtest_X_test3)
 newtest_X_test3 = newtest_X_test3[:per1,:]
+print(len(newtest_X_test3))
 
 per1 = (len(combo_X_test2)*2)/3 
 combo_X_test_1 = combo_X_test2[:per1,:]
 combo_X_test_1_1 = combo_X_test2[per1:,:]
+print("lung ",len(combo_X_test_1))
 
 newtest_X_test4 = np.concatenate((combo_X_test_1_1[:len(spam_X_test4),:],spam_X_test4))
 per1 = (len(newtest_X_test4)*2)/3
 newtest_X_test4 = shuffle(newtest_X_test4)
 newtest_X_test4 = newtest_X_test4[:per1,:]
+print(len(newtest_X_test4))
 
 per1 = (len(combo_X_test3)*2)/3 
 combo_X_test_2 = combo_X_test3[:per1,:]
 combo_X_test_2_2 = combo_X_test3[per1:,:]
+print("lung ",len(combo_X_test_2))
 
 newtest_X_test5 = np.concatenate((combo_X_test_2_2[:len(spam_X_test5),:],spam_X_test5))
 per1 = (len(newtest_X_test5)*2)/3
 newtest_X_test5 = shuffle(newtest_X_test5)
 newtest_X_test5 = newtest_X_test5[:per1,:]
+print(len(newtest_X_test5))
 
 per1 = (len(combo_X_test4)*2)/3 
 combo_X_test_3 = combo_X_test4[:per1,:]
 combo_X_test_3_3 = combo_X_test4[per1:,:]
+print("lung ",len(combo_X_test_3))
 
 newtest_X_test6 = np.concatenate((combo_X_test_3_3[:len(spam_X_test6),:],spam_X_test6))
 per1 = (len(newtest_X_test6)*2)/3
 newtest_X_test6 = shuffle(newtest_X_test6)
 newtest_X_test6 = newtest_X_test6[:per1,:]
+print(len(newtest_X_test6))
 
 per1 = (len(combo_X_test5)*2)/3 
 combo_X_test_4 = combo_X_test5[:per1,:]
 combo_X_test_4_4 = combo_X_test5[per1:,:]
+print("lung ",len(combo_X_test_4))
 
 newtest_X_test7 = np.concatenate((combo_X_test_4_4[:len(spam_X_test7),:],spam_X_test7))
 per1 = (len(newtest_X_test7)*2)/3
 newtest_X_test7 = shuffle(newtest_X_test7)
 newtest_X_test7 = newtest_X_test7[:per1,:]
+print(len(newtest_X_test7))
 
 per1 = (len(combo_X_test6)*2)/3 
 combo_X_test_5 = combo_X_test6[:per1,:]
 combo_X_test_5_5 = combo_X_test6[per1:,:]
+print("lung ",len(combo_X_test_5))
 
-beta = 0.9999
+beta = 0.99
 n_trees = 100
 spam_RFC = RandomForestClassifier(max_features=5,n_estimators=n_trees,random_state=42)
 spam_RFC.fit(spam_X_train,spam_y_train)
@@ -187,29 +199,9 @@ somma = len(spam_X_test) + len(spam_X_test2) + len(combo_X_test) + len(spam_X_te
 print(somma)
 
 
-#aa = spam_RFC.score(spam_X_test, spam_y_test)
-#n_nodes = []
-#max_depths = []
+out_file = open("test_ogni100_variabile.txt","w")
 
-#print(aa)
-# Stats about the trees in random forest
-
-#for ind_tree in spam_RFC.estimators_:
-#    n_nodes.append(ind_tree.tree_.node_count)
-#    max_depths.append(ind_tree.tree_.max_depth)
-
-#print({int(np.mean(n_nodes))})
-#print({int(np.mean(max_depths))})
-
-#trainpredictions = spam_RFC.predict(X)
 op = spam_RFC.predict_proba(newtest_X_test)
-#print(op2)
-#for ind_tree in spam_RFC.estimators_:
-# 	print(ind_tree.predict_proba(spam_X_test))
-# 	print('ciaoaicoao')
-
-#print(op)
-#print('das')
 
 mostrato = max(op[0])
 prob=[]
@@ -219,10 +211,11 @@ for xx in op[1:]:
     probabilita_nuova = max(xx)
     mostrato = beta*mostrato+(1-beta)*probabilita_nuova
     prob.append(mostrato) 
-    if(mostrato < 0.9):
-       break
     print(mostrato)  
 
+out_file.write("Punto rosso ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 plt.axvline(x=len(prob),color = 'r')
 
 op = spam_RFC.predict_proba(newtest_X_test2)
@@ -238,11 +231,14 @@ for xx in op[1:]:
     print(mostrato)  
 
 
-plt.axvline(x=len(prob),color='g')
+if(mostrato < 0.9):
+    spam_RFC.fit(combo_X_train,combo_y_train)
+    out_file.write("Punto blu ")
+    out_file.write(str(len(prob)))
+    out_file.write("\n")
+    plt.axvline(x=len(prob),color = 'b')
 
-spam_RFC.fit(combo_X_train,combo_y_train)
 op  = spam_RFC.predict_proba(combo_X_test_0)
-
 mostrato = beta*mostrato+(1-beta)*max(op[0])
 prob.append(mostrato)
 
@@ -250,11 +246,12 @@ for xx in op[1:]:
     probabilita_nuova = max(xx)
     mostrato = beta*mostrato+(1-beta)*probabilita_nuova
     prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
     print(mostrato)  
 
 
+out_file.write("Punto rosso ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 plt.axvline(x=len(prob),color = 'r')
 
 op = spam_RFC.predict_proba(newtest_X_test3)
@@ -269,26 +266,8 @@ for xx in op[1:]:
     if(mostrato < 0.9):
        break
 
-plt.axvline(x=len(prob),color='g')
-spam_RFC.fit(combo_X_train2,combo_y_train2)
 
-op  = spam_RFC.predict_proba(combo_X_test_1)
-
-mostrato = beta*mostrato+(1-beta)*max(op[0])
-prob.append(mostrato)
-
-for xx in op[1:]:
-    probabilita_nuova = max(xx)
-    mostrato = beta*mostrato+(1-beta)*probabilita_nuova 
-    prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
-    print(mostrato)  
-
-
-plt.axvline(x=len(prob),color = 'r')
 op  = spam_RFC.predict_proba(newtest_X_test4)
-
 mostrato = beta*mostrato+(1-beta)*max(op[0])
 prob.append(mostrato)
 
@@ -301,11 +280,14 @@ for xx in op[1:]:
     print(mostrato)  
 
 
-plt.axvline(x=len(prob),color='g')
-spam_RFC.fit(combo_X_train3,combo_y_train3)
+if(mostrato < 0.9):
+    spam_RFC.fit(combo_X_train3,combo_y_train3)
+    plt.axvline(x=len(prob),color = 'b')
+    out_file.write("Punto blu ")
+    out_file.write(str(len(prob)))
+    out_file.write("\n")
 
 op  = spam_RFC.predict_proba(combo_X_test_2)
-
 mostrato = beta*mostrato+(1-beta)*max(op[0])
 prob.append(mostrato)
 
@@ -313,12 +295,16 @@ for xx in op[1:]:
     probabilita_nuova = max(xx)
     mostrato = beta*mostrato+(1-beta)*probabilita_nuova 
     prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
+#    if(mostrato < 0.9):
+#       break
     print(mostrato)  
 
 
+out_file.write("Punto rosso ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 plt.axvline(x=len(prob),color = 'r')
+
 op  = spam_RFC.predict_proba(newtest_X_test5)
 
 mostrato = beta*mostrato+(1-beta)*max(op[0])
@@ -333,11 +319,16 @@ for xx in op[1:]:
     print(mostrato)  
 
 
+out_file.write("Punto verde ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 plt.axvline(x=len(prob),color='g')
-spam_RFC.fit(combo_X_train4,combo_y_train4)
+
+
+#spam_RFC.fit(combo_X_train4,combo_y_train4)
+#plt.axvline(x=len(prob),color = 'b')
 
 op  = spam_RFC.predict_proba(combo_X_test_3)
-
 mostrato = beta*mostrato+(1-beta)*max(op[0])
 prob.append(mostrato)
 
@@ -345,15 +336,21 @@ for xx in op[1:]:
     probabilita_nuova = max(xx)
     mostrato = beta*mostrato+(1-beta)*probabilita_nuova 
     prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
+#    if(mostrato < 0.9):
+#       break
     print(mostrato)  
 
 
+out_file.write("Punto rosso ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 plt.axvline(x=len(prob),color = 'r')
+
 op  = spam_RFC.predict_proba(newtest_X_test6)
-
 mostrato = beta*mostrato+(1-beta)*max(op[0])
+#plt.axvline(x=len(prob),color = 'b')
+    
+
 prob.append(mostrato)
 
 for xx in op[1:]:
@@ -364,24 +361,6 @@ for xx in op[1:]:
        break
     print(mostrato)  
 
-
-plt.axvline(x=len(prob),color='g')
-spam_RFC.fit(combo_X_train5,combo_y_train5)
-op  = spam_RFC.predict_proba(combo_X_test_4)
-
-mostrato = beta*mostrato+(1-beta)*max(op[0])
-prob.append(mostrato)
-
-for xx in op[1:]:
-    probabilita_nuova = max(xx)
-    mostrato = beta*mostrato+(1-beta)*probabilita_nuova 
-    prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
-    print(mostrato)  
-
-
-plt.axvline(x=len(prob),color = 'r')
 op  = spam_RFC.predict_proba(newtest_X_test7)
 
 mostrato = beta*mostrato+(1-beta)*max(op[0])
@@ -395,35 +374,43 @@ for xx in op[1:]:
        break
     print(mostrato)  
 
-plt.axvline(x=len(prob),color='g')
-spam_RFC.fit(combo_X_train6,combo_y_train6)
-op  = spam_RFC.predict_proba(combo_X_test_5)
+if(mostrato < 0.9):
+    spam_RFC.fit(combo_X_train6,combo_y_train6)
+    plt.axvline(x=len(prob),color = 'b')
+    out_file.write("Punto blu ")
+    out_file.write(str(len(prob)))
+    out_file.write("\n")
 
+op  = spam_RFC.predict_proba(combo_X_test_5)
 mostrato = beta*mostrato+(1-beta)*max(op[0])
 prob.append(mostrato)
+
+
 
 for xx in op[1:]:
     probabilita_nuova = max(xx)
     mostrato = beta*mostrato+(1-beta)*probabilita_nuova 
     prob.append(mostrato)
-    if(mostrato < 0.9):
-       break
+#    if(mostrato < 0.9):
+#       break
     print(mostrato)  
 
+out_file.write("Punto rosso ")
+out_file.write(str(len(prob)))
+out_file.write("\n")
 
-out_file = open("test_ogni10000_variabile.txt","w")
-
+x = 0
 for element in prob:
-    print >>out_file, element
+    print >>out_file,x," ",element
+    x = x+1
 
 out_file.write("Ho finito\n")
 
-for element in range(0,len(prob)):
-    print >>out_file,element
-
 out_file.close()
 
+
 plt.axvline(x=len(prob),color = 'r')
+
 asse_x = range(0,len(prob)) 
 plt.plot(asse_x,prob)
 plt.show()
