@@ -460,7 +460,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 			        
 			 if(packet_counter_inv < 256) {
 			        
-				flow_sequence_INVERSE[packet_counter] = size_payload;
+				flow_sequence_INVERSE[packet_counter_inv] = size_payload;
 		                packet_counter_inv++;
 		         }
 		  }
