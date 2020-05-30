@@ -465,8 +465,8 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header, const u_char *pa
 		         }
 		  }
 	        
-	     if ( ( tcp->th_flags == 17 )  || ( packet_counter == 256 )  || 
-                ( ( packet_counter_inv == 256 ) && ( packet_counter > 128 ) ) ) {
+	     if ( ( tcp->th_flags == 17 )  || ( packet_counter == 255 )  || 
+                ( ( packet_counter_inv == 255 ) && ( packet_counter > 127 ) ) ) {
                 
 		int lock = 0;
 		int jj,kk;
