@@ -13,5 +13,5 @@ gcc source.c kiss_fft.c kiss_fftr.c -lm -lpcap
 
 The folder runtime contains the source codes relative the performance analysis. Compile using the Makefile inside each folder, remember to install the library FFTW3 http://www.fftw.org/ and enable the optimizations when you install it, using:
 ./configure  --enable-float --enable-openmp --enable-sse2 --enable-avx --enable-avx2 --enable-avx512 .
-Furthermore, you need to install the library Volk https://www.libvolk.org/, it is useful for the magnitude computation.
+Furthermore, you need to install the library Volk https://www.libvolk.org/, it is useful for speedup the magnitude computation.
  
