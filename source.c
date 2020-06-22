@@ -684,6 +684,7 @@ int main(int argc, char *argv[]) {
    
      packet_counter = 0;
      packet_counter_inv = 0;
+     restart = 0;
 
   } 
 
